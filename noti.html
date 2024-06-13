@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Google Calendar Integration and Embed</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-top: 9%;
+            margin-bottom: 4%;
+        }
+        .calendar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: fit-content;
+        }
+        </style>
+    </head>
+    <body>
+        
+        <!-- header section starts  -->
+
+<header>
+
+    <a href="index.html" class="logo"><i class="fas fa-child"></i>kikiddo</a>
+
+    <div id="menu-bars" class="fas fa-bars"></div>
+
+    <nav class="navbar">
+        <a href="index.html">home</a>
+        <a href="#features">features</a>
+        <a href="#about">about</a>
+        <a href="#services">services</a>
+        <a href="#teams">Teams</a>
+        <a href="#reveiw">Review</a>
+        <a href="login.html"><i class="fas fa-user-circle"></i>Account</a>
+    </nav>
+
+</header>
+
+<!-- header section ends -->
+        
+        <div class="content">
+        <!-- Embed Google Calendar Interface -->
+        <div class="calendar-container">
+            <iframe id="calendar-iframe" src="https://calendar.google.com/calendar/embed?src=kikiddo09%40gmail.com&ctz=Asia%2FKuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+
+        <!-- API Integration for Event Listing -->
+        <pre id="content"></pre>
+    </div>
+        
+<!-- footer section  -->
+<div class="footer">
+    <div class="footer-left">
+        <h4 class="title">contact details</h4>
+        <p style="font-size: 1.7rem;"> 
+            <i class="fas fa-envelope"></i> 
+            <a href="mailto:kikiddo09@gmail.com" style="text-decoration: none; color: inherit;">kikiddo09@gmail.com</a>
+            <br>
+        </p>
+        <p style="font-size: 1.7rem;"> 
+            <i class="fas fa-phone"></i> 
+            +09-456780 
+        </p>
+    </div>
+
+    <div class="footer-center">
+        <p>created by <span> Group 9 CSE3433 </span> | &copy; all rights reserved!</p>
+    </div>
+
+    <div class="footer-right">
+        <h4 class="title">follow us</h4>
+        <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+        <a href="https://x.com/i/flow/login" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/accounts/login/" class="fab fa-instagram"></a>
+    </div>
+</div>
+<!-- footer section ends -->
+
+<!-- JavaScript section --> 
+    <script>
+        const CLIENT_ID = '670726500534-5f4bejg7o61lbsocbakavj0j2g9r4f4m.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyDZSlSX-M8-wv1xBBN6uhByBNivAV6jf3E';
+        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+        const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+        let calendarId;
+
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
+
+        function gapiLoaded() {
+            gapi.load('client', initializeGapiClient);
+        }
+
+        async function initializeGapiClient() {
+            await gapi.client.init({
+                apiKey: API_KEY,
+                discoveryDocs: DISCOVERY_DOCS,
+            });
+            gapiInited = true;
+            maybeEnableFeatures();
+        }
+
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: '', // defined later
+            });
+            gisInited = true;
+            maybeEnableFeatures();
+        }
+
+        function maybeEnableFeatures() {
+            if (gapiInited && gisInited) {
+                handleAuth();
+            }
+        }
+
+        function handleAuth() {
+            tokenClient.callback = async (resp) => {
+                if (resp.error !== undefined) {
+                    throw (resp);
+                }
+                await fetchCalendarId();
+                listUpcomingEvents();
+            };
+
+            if (gapi.client.getToken() === null) {
+                tokenClient.requestAccessToken({prompt: 'consent'});
+            } else {
+                tokenClient.requestAccessToken({prompt: ''});
+            }
+        }
+
+        async function fetchCalendarId() {
+            const response = await gapi.client.calendar.calendarList.list();
+            const calendars = response.result.items;
+            if (calendars.length > 0) {
+                calendarId = calendars[0].id;
+            } else {
+                throw new Error('No calendars found.');
+            }
+        }
+
+        async function listUpcomingEvents() {
+            let response;
+            try {
+                response = await gapi.client.calendar.events.list({
+                    'calendarId': calendarId,
+                    'timeMin': (new Date()).toISOString(),
+                    'showDeleted': false,
+                    'singleEvents': true,
+                    'maxResults': 10,
+                    'orderBy': 'startTime'
+                });
+            } catch (err) {
+                document.getElementById('content').innerText = err.message;
+                return;
+            }
+
+            const events = response.result.items;
+            if (!events || events.length === 0) {
+                document.getElementById('content').innerText = 'No upcoming events found.';
+                return;
+            }
+
+            const content = events.map((event) => {
+                const when = event.start.dateTime || event.start.date;
+                return `${event.summary} (${when})`;
+            }).join('\n');
+            document.getElementById('content').innerText = content;
+        }
+
+        function checkLibrariesLoaded() {
+            if (typeof gapi !== 'undefined' && typeof google !== 'undefined') {
+                gapiLoaded();
+                gisLoaded();
+            } else {
+                setTimeout(checkLibrariesLoaded, 100);
+            }
+        }
+
+        checkLibrariesLoaded();
+    </script>
+    <script src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+<!-- JavaScript section end--> 
+    </body>
+</html>

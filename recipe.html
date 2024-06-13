@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #recipe-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .recipe {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .recipe img {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+        }
+
+        .details {
+            display: none;
+            text-align: left;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .details ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        .details ul li {
+            margin-bottom: 5px;
+        }
+
+        .toggle-details {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-details:hover {
+            background-color: #0056b3;
+        }
+
+        .search-recipes {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-recipes input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-recipes input:focus {
+            border-color: #007BFF;
+        }
+
+        /* Updated Search Button Styles */
+        .search-recipes button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #4CAF50; /* Match header/footer color */
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .search-recipes button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .search-recipes button i {
+            margin-right: 5px;
+        }
+
+        #recipes {
+            padding: 0;
+        }
+
+        .no-results {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2em;
+            color: #ff0000;
+        }
+
+        .recipe-main {
+        background-color: rgb(243,239,216);
+    </style>
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header>
+
+    <a href="index.html" class="logo"><i class="fas fa-child"></i>kikiddo</a>
+
+    <div id="menu-bars" class="fas fa-bars"></div>
+
+    <nav class="navbar">
+        <a href="index.html">home</a>
+        <a href="#features">features</a>
+        <a href="#about">about</a>
+        <a href="#services">services</a>
+        <a href="#teams">Teams</a>
+        <a href="#reveiw">Review</a>
+        <a href="login.html"><i class="fas fa-user-circle"></i>Account</a>
+    </nav>
+
+</header>
+
+<!-- header section ends -->
+
+<main class="recipe-main">
+<section class="search-recipes">
+    <h1>Search for Nutritious Meals</h1>
+    <div class="search-bar">
+        <input type="text" id="recipe-query" placeholder="Search for a recipe...">
+        <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+    </div>
+    <div id="recipe-results"></div>
+    <div class="no-results" style="display: none;">Sorry, this recipe is not in our database.</div>
+</section>
+</main>
+
+<!-- footer section  -->
+<div class="footer">
+    <div class="footer-left">
+        <h4 class="title">contact details</h4>
+        <p style="font-size: 1.7rem;"> 
+            <i class="fas fa-envelope"></i> 
+            <a href="mailto:kikiddo@gmail.com" style="text-decoration: none; color: inherit;">kikiddo09@gmail.com</a>
+            <br>
+        </p>
+        <p style="font-size: 1.7rem;"> 
+            <i class="fas fa-phone"></i> 
+            +09-456780 
+        </p>
+    </div>
+
+    <div class="footer-center">
+        <p>created by <span> Group 9 CSE3433 </span> | &copy; all rights reserved!</p>
+    </div>
+
+    <div class="footer-right">
+        <h4 class="title">follow us</h4>
+        <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+        <a href="https://x.com/i/flow/login" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/accounts/login/" class="fab fa-instagram"></a>
+    </div>
+</div>
+<!-- footer section ends -->
+
+<!-- JavaScript section -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+let menu = document.querySelector('#menu-bars');
+let navbar = document.querySelector('.navbar');
+
+menu.addEventListener('click', () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('nav-toggle');
+});
+
+window.onscroll = () => {
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('nav-toggle');
+}
+
+// Edamam API Integration
+const appId = '53abec14'; // Replace with your App ID
+const appKey = 'e7ebaddf60047d03fa5a9fff253572bd'; // Replace with your App Key
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Display default food recipes for kids' health on page load
+    displayDefaultRecipes();
+
+    // Attach search function to the button
+    document.getElementById('searchBtn').addEventListener('click', searchRecipes);
+});
+
+function displayDefaultRecipes() {
+    const defaultQuery = encodeURIComponent("healthy recipes for kids");
+    fetchRecipes(defaultQuery);
+}
+
+function searchRecipes() {
+    const query = document.getElementById('recipe-query').value;
+    if (query.trim() === "") {
+        displayNoResultsMessage("Please enter a search term.");
+        return;
+    }
+    fetchRecipes(query);
+}
+
+function fetchRecipes(query) {
+    const url = `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}&from=0&to=100`; // Fetch maximum 100 recipes
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            filterAndDisplayRecipes(data.hits);
+        })
+        .catch(error => {
+            console.error('Error fetching the recipes:', error);
+            displayNoResultsMessage("An error occurred while fetching the recipes. Please try again.");
+        });
+}
+
+function filterAndDisplayRecipes(recipes) {
+    const filteredRecipes = recipes.filter(recipeData => {
+        const ingredients = recipeData.recipe.ingredientLines.join(' ').toLowerCase();
+        const prohibitedIngredients = ['ham', 'pork', 'wine', 'alcohol'];
+        return !prohibitedIngredients.some(ingredient => ingredients.includes(ingredient));
+    });
+
+    displayRecipes(filteredRecipes);
+}
+
+function checkForAllergens(ingredients) {
+    const allergens = ['peanut', 'shellfish', 'milk', 'egg', 'wheat', 'soy'];
+    const foundAllergens = allergens.filter(allergen => ingredients.includes(allergen.toLowerCase()));
+    return foundAllergens.length > 0 ? `This recipe contains: ${foundAllergens.join(', ')}` : 'No common allergens detected';
+}
+
+function displayRecipes(recipes) {
+    const recipeContainer = document.getElementById('recipe-results');
+    recipeContainer.innerHTML = ''; // Clear any existing content
+    
+    if (recipes.length === 0) {
+        displayNoResultsMessage("Sorry, this recipe is not in our database.");
+        return;
+    } else {
+        document.querySelector('.no-results').style.display = 'none';
+    }
+
+    recipes.forEach(recipeData => {
+        const recipe = recipeData.recipe;
+        const ingredientsList = recipe.ingredientLines.join(' ');
+        const allergenInfo = checkForAllergens(ingredientsList);
+
+        const ingredients = recipe.ingredientLines.map(line => `<li>${line}</li>`).join('');
+        const nutrients = recipe.totalNutrients;
+        const protein = nutrients.PROCNT ? `${Math.round(nutrients.PROCNT.quantity)} ${nutrients.PROCNT.unit}` : 'N/A';
+        const carbs = nutrients.CHOCDF ? `${Math.round(nutrients.CHOCDF.quantity)} ${nutrients.CHOCDF.unit}` : 'N/A';
+        const fat = nutrients.FAT ? `${Math.round(nutrients.FAT.quantity)} ${nutrients.FAT.unit}` : 'N/A';
+        const fiber = nutrients.FIBTG ? `${Math.round(nutrients.FIBTG.quantity)} ${nutrients.FIBTG.unit}` : 'N/A';
+        const vitamins = nutrients.VITC ? `${Math.round(nutrients.VITC.quantity)} ${nutrients.VITC.unit}` : 'N/A';
+
+        const recipeElement = document.createElement('div');
+        recipeElement.className = 'recipe';
+
+        recipeElement.innerHTML = `
+            <h3>${recipe.label}</h3>
+            <img src="${recipe.image}" alt="${recipe.label}">
+            <p>Calories: ${Math.round(recipe.calories)}</p>
+            <p>Protein: ${protein}</p>
+            <p>Carbohydrates: ${carbs}</p>
+            <p>Fat: ${fat}</p>
+            <p>Fiber: ${fiber}</p>
+            <p>Vitamin C: ${vitamins}</p>
+            <p class="allergen-info">${allergenInfo}</p>
+            <div class="toggle-details">View Details</div>
+            <div class="details">
+                <h4>Ingredients:</h4>
+                <ul>${ingredients}</ul>
+                <h4>Instructions:</h4>
+                <p>For full instructions, please click <a href="${recipe.url}" target="_blank">here</a>.</p>
+            </div>
+        `;
+
+        recipeContainer.appendChild(recipeElement);
+    });
+
+    // Attach event listeners to toggle details
+    document.querySelectorAll('.toggle-details').forEach(button => {
+        button.addEventListener('click', function() {
+            const details = this.nextElementSibling;
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+}
+
+function displayNoResultsMessage(message) {
+    const noResultsElement = document.querySelector('.no-results');
+    noResultsElement.textContent = message;
+    noResultsElement.style.display = 'block';
+    document.getElementById('recipe-results').innerHTML = '';
+}
+</script>
+<!-- JavaScript section ends -->
+
+</body>
+</html>

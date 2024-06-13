@@ -1,0 +1,180 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 3 Jun 2024, 9:16:55 am
+    Author     : M S I
+*/
+
+
+/* WEATHER PAGE */
+      .weather-main {
+        background-image: url("images/weather7.jpg");
+        background-position: center;
+        background-size: cover;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;  /* Stack children vertically */
+        align-items: center;
+        justify-content: center;  /* Ensure space between elements */
+        min-height: 100vh;  /* Full viewport height */
+        padding: 10px;
+        padding-bottom: 50px;
+    }
+    
+    .weather-main #weather-container {
+        background: rgba(255, 255, 255, 0.3);
+        max-width: 450px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+    }
+    
+    .weather-main h2, 
+    .weather-main label, 
+    .weather-main p {
+        color: #ffffff;
+        margin: 8px 0;
+    }
+    
+    .weather-main input {
+        width: calc(100% - 16px);
+        padding: 8px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 1px solid white;
+        margin-top: 20px;
+    }
+    
+    .weather-main button {
+        /*background: #debff4;*/
+        background: #63b6cd;
+        color: rgb(255, 255, 255);
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        width: 100px;
+        font-size: 15px;
+    }
+    
+    .weather-main .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    
+    .weather-main .button-container button {
+        flex: 1;
+        margin: 0 5px;
+        padding: 8px 20px; /* Adjust button padding */
+        font-size: 16px; /* Adjust font size */
+    }
+    
+    .weather-main button:hover {
+        background: #59a1b5;
+    }
+    
+    .weather-main #temp-div p {
+        font-size: 60px;
+        margin-top: -30px;
+    }
+    
+    .weather-main #weather-info {
+        font-size: 20px;
+    }
+    
+    .weather-main #weather-icon {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 10px;
+        margin-bottom: 0;
+        display: none;
+    }
+    
+    .weather-main #hourly-forecast-container {
+        margin-top: 20px;
+    }
+    
+    .weather-main #hourly-forecast {
+        margin-top: 50px;
+        overflow-x: auto;
+        white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .weather-main .hourly-item {
+        flex: 0 0 auto;
+        width: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 10px;
+        color: white;
+    }
+    
+    .weather-main .hourly-item img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 5px;
+    }
+    
+    .weather-main #hourly-heading {
+        color: #fff;
+        margin-top: 10px;
+    }
+    
+    /* Modal Styles */
+    .weather-main .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .weather-main .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: left;
+        font-size: 130%;
+    }
+    
+    /* Close Button */
+    .weather-main .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .weather-main .close:hover,
+    .weather-main .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    /* Heading Style */
+    .weather-main .modal-content h2,
+    .weather-main .modal-content p {
+        color: #333; /* Change heading color to black */
+        margin-top: 0; /* Remove default margin */
+    }
+    
+    /*END WEATHER PAGE*/

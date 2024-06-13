@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="weatherStyle.css">
+
+    <style>
+        
+    </style>
+
+</head>
+<body>
+
+<!-- header section starts  -->
+<header>
+
+    <a href="index.html" class="logo"><i class="fas fa-child"></i>kikiddo</a>
+
+    <div id="menu-bars" class="fas fa-bars"></div>
+
+    <nav class="navbar">
+        <a href="index.html">home</a>
+        <a href="#features">features</a>
+        <a href="#about">about</a>
+        <a href="#services">services</a>
+        <a href="#teams">Teams</a>
+        <a href="#reveiw">Review</a>
+        <a href="login.html"><i class="fas fa-user-circle"></i>Account</a>
+    </nav>
+
+</header>
+<!-- header section ends -->
+
+<main class="weather-main">
+    <div id="weather-container" style="margin-top: 10%;">
+        <h2>Weather Forecast</h2>
+        <input type="text" id="city" name="city" placeholder="Enter city">
+        <div class="button-container">
+            <button onclick="getWeather()">Search</button>
+            <button id="what-to-wear-btn" onclick="displayModal()" style="display: none;">Recommendation</button>
+        </div>
+        <img id="weather-icon" alt="Weather Icon">
+        <div id="temp-div"></div>
+        <div id="weather-info"></div>
+        <div id="hourly-forecast"></div>
+    </div>
+    <div id="weather-clothing-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Suggested Clothing & Activities For Kids</h2>
+            <div id="clothing-suggestions"></div>
+        </div>
+    </div>
+</main>
+
+<!-- footer section  -->
+<div class="footer">
+    <div class="footer-left">
+        <h4 class="title">contact details</h4>
+        <p style="font-size: 1.7rem;"> 
+            <i class="fas fa-envelope"></i> 
+            <a href="mailto:kikiddo09@gmail.com" style="text-decoration: none; color: inherit;">kikiddo09@gmail.com</a>
+            <br>
+        </p>
+        <p style="font-size: 1.7rem;"> 
+            <i class="fas fa-phone"></i> 
+            +09-456780 
+        </p>
+    </div>
+
+    <div class="footer-center">
+        <p>created by <span> Group 9 CSE3433 </span> | &copy; all rights reserved!</p>
+    </div>
+
+    <div class="footer-right">
+        <h4 class="title">follow us</h4>
+        <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+        <a href="https://x.com/i/flow/login" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/accounts/login/" class="fab fa-instagram"></a>
+    </div>
+</div>
+<!-- footer section ends -->
+
+<script src="weather.js"></script>
+    
+</body>
+</html>
