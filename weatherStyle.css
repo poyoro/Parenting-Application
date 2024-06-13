@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 /* WEATHER PAGE */
       .weather-main {
-        background-image: url("images/weather7.jpg");
+        background-image: url("weather7.jpg");
         background-position: center;
         background-size: cover;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
