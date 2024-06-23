@@ -15,7 +15,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin:0; 
     padding:0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+   
     text-transform: capitalize;
     text-decoration: none;
     outline:none; 
@@ -236,10 +236,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     grid-template-columns: repeat(2, 1fr); /* 2 columns grid */
     gap: 1rem; /* Space between the grid items */
     justify-items: center; /* Center items horizontally */
-    /*display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap; */
   }
   
   .services .box-container .box{
@@ -250,15 +246,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
     position: relative;
     cursor: pointer;
-
-    /*overflow: hidden;
-    height: 23rem;
-    flex:1 1 30rem;
-    margin:1rem;
-    border-radius: 1rem;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
-    position: relative;
-    cursor: pointer;*/
   }
 
   /* Updated CSS for image to cover entire box */
