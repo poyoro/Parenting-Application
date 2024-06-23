@@ -129,6 +129,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         color: #fff;
         margin-top: 10px;
     }
+#weather-container{
+    margin-top: 10%;
+    
+}
     
     /* Modal Styles */
     .weather-main .modal {
