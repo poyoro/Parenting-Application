@@ -176,5 +176,69 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         color: #333; /* Change heading color to black */
         margin-top: 0; /* Remove default margin */
     }
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .weather-main {
+        padding: 5px;
+    }
+
+    .weather-main #weather-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .weather-main input {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .weather-main button {
+        width: 80px;
+        font-size: 14px;
+    }
+
+    .weather-main #temp-div p {
+        font-size: 40px;
+        margin-top: 0;
+    }
+
+    .weather-main #weather-info {
+        font-size: 16px;
+    }
+
+    .weather-main #weather-icon {
+        width: 120px;
+        height: 120px;
+    }
+
+    .weather-main .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .weather-main .button-container button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .weather-main .modal-content {
+        width: 90%;
+        font-size: 100%;
+    }
+
+    .weather-main .hourly-item {
+        width: 60px;
+    }
+
+    .weather-main .hourly-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .weather-main #hourly-heading {
+        font-size: 18px;
+    }
+}
     
     /*END WEATHER PAGE*/
