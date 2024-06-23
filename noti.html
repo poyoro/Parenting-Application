@@ -93,6 +93,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
 <!-- JavaScript section --> 
     <script>
+        let menu = document.querySelector('#menu-bars');
+let navbar = document.querySelector('.navbar');
+
+menu.addEventListener('click', () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('nav-toggle');
+});
+
+window.onscroll = () => {
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('nav-toggle');
+}
+
         const CLIENT_ID = '670726500534-5f4bejg7o61lbsocbakavj0j2g9r4f4m.apps.googleusercontent.com';
         const API_KEY = 'AIzaSyDZSlSX-M8-wv1xBBN6uhByBNivAV6jf3E';
         const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
