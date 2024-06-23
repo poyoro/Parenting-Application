@@ -11,22 +11,124 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
         <link rel="stylesheet" href="style.css">
         <style>
+           body {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                box-sizing: border-box;
+            }
+
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px;
+                background: #333;
+                color: #fff;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .navbar {
+                display: flex;
+                gap: 15px;
+            }
+
+            .navbar a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1rem;
+            }
+
+            .navbar .fas.fa-user-circle {
+                font-size: 1.2rem;
+            }
+
             .content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            margin-top: 9%;
-            margin-bottom: 4%;
-        }
-        .calendar-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: fit-content;
-        }
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                margin-top: 5%;
+                margin-bottom: 4%;
+            }
+
+            .calendar-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                max-width: 800px;
+            }
+
+            iframe {
+                width: 100%;
+                height: 600px;
+                border: 0;
+                frameborder: 0;
+                scrolling: no;
+            }
+
+            .footer {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: #333;
+                color: #fff;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .footer .title {
+                margin-bottom: 10px;
+                font-size: 1.2rem;
+            }
+
+            .footer p, .footer a {
+                font-size: 1rem;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .footer a {
+                margin: 0 10px;
+                color: #fff;
+            }
+
+            @media (max-width: 768px) {
+                header {
+                    flex-direction: column;
+                }
+
+                .navbar {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .content {
+                    margin-top: 10%;
+                }
+
+                iframe {
+                    height: 400px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .navbar a {
+                    font-size: 0.9rem;
+                }
+
+                iframe {
+                    height: 300px;
+                }
+            }
         </style>
     </head>
     <body>
