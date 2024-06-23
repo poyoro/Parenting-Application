@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
         <link rel="stylesheet" href="style.css">
         <style>
-           body {
+            body {
                 margin: 0;
                 padding: 0;
                 font-family: Arial, sans-serif;
@@ -36,13 +36,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 width: 100%;
                 max-width: 800px;
             }
-          
+
+            iframe {
+                width: 100%;
+                height: 600px;
+                border: 0;
+                frameborder: 0;
+                scrolling: no;
+            }
+
+            @media (max-width: 768px) {
                 .content {
                     margin-top: 10%;
                 }
 
-             
+                iframe {
+                    height: 500px;
+                }
+            }
 
+            @media (max-width: 480px) {
+                .content {
+                    margin-top: 10%;
+                }
+
+                iframe {
+                    height: 400px;
+                }
+            }
         </style>
     </head>
     <body>
