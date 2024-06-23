@@ -141,6 +141,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         height: 100%;
         overflow: auto;
         background-color: rgba(0, 0, 0, 0.4);
+        margin-top: 10%;
     }
     
     .weather-main .modal-content {
